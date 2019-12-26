@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SQLite;
 
 namespace BTSCalculator.Core
@@ -11,6 +12,27 @@ namespace BTSCalculator.Core
         public ApplicationConnectionStringSystem()
         {
             ConnectionString = ConnectionStringBuilder(); 
+        }
+
+        public ConnectionState TextConnection()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    return conn.State;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    conn.Close(); 
+                }
+            }
         }
 
         private string ConnectionStringBuilder()

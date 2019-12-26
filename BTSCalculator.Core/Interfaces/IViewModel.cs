@@ -2,6 +2,6 @@
 {
     internal interface IViewModel
     {
-        RelayCommand ReturnToMainMenu_COMMAND { get; set; }
+        RelayCommand ReturnToMainMenu_COMMAND { get; }
     }
 }

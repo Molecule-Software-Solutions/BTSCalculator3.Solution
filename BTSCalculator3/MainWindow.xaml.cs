@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BTSCalculator.Core;
 
 namespace BTSCalculator3
 {
@@ -20,9 +21,32 @@ namespace BTSCalculator3
     /// </summary>
     public partial class MainWindow : Window
     {
+        ApplicationViewmodel ViewModel;
         public MainWindow()
         {
+            ViewModel = StaticAccessSystem.ApplicationVM;
+            DataContext = ViewModel;
             InitializeComponent();
+            ViewmodelPropertyChangeMonitor();
+            SetDefaultPage(); 
+        }
+
+        private void SetDefaultPage()
+        {
+            WindowContentFrame.Content = ViewModel.CurrentPage.GetApplicationPage(); 
+        }
+
+        private void ViewmodelPropertyChangeMonitor()
+        {
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        }
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ViewModel.CurrentPage))
+            {
+                WindowContentFrame.Content = ViewModel.CurrentPage.GetApplicationPage();
+            }
         }
     }
 }

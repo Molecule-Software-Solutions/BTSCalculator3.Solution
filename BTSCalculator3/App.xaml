@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:BTSCalculator3"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="BackgroundGray" Color="#404040"/>
+        <SolidColorBrush x:Key="TitleBarYellow" Color="#806600"/>
+        <SolidColorBrush x:Key="TitleBarBorderYellow" Color="#fff5cc"/>
     </Application.Resources>
 </Application>

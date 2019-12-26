@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTSCalculator3", "BTSCalculator3\BTSCalculator3.csproj", "{DC0A9125-9E45-4CED-B3C8-3EDAA08AA6DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTSCalculator.Core", "BTSCalculator.Core\BTSCalculator.Core.csproj", "{4500672B-A91B-47B8-BEC0-11509CB479AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC0A9125-9E45-4CED-B3C8-3EDAA08AA6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0A9125-9E45-4CED-B3C8-3EDAA08AA6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0A9125-9E45-4CED-B3C8-3EDAA08AA6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0A9125-9E45-4CED-B3C8-3EDAA08AA6DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4500672B-A91B-47B8-BEC0-11509CB479AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4500672B-A91B-47B8-BEC0-11509CB479AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4500672B-A91B-47B8-BEC0-11509CB479AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4500672B-A91B-47B8-BEC0-11509CB479AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FB25F52-8C88-4B2D-ABE9-8C851D9B5276}
+	EndGlobalSection
+EndGlobal

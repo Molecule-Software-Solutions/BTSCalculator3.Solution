@@ -54,12 +54,24 @@ namespace BTSCalculator.Core
         {
             StringBuilder sb = new StringBuilder();
 
+            // Creates holiday table
             sb.AppendLine("CREATE TABLE IF NOT EXISTS Holidays (");
             sb.AppendLine("    RecordID INTEGER PRIMARY KEY AUTOINCREMENT");
             sb.AppendLine("                     UNIQUE");
             sb.AppendLine("                     NOT NULL,");
             sb.AppendLine("    Date     DATE    NOT NULL");
             sb.AppendLine(");");
+
+            // Creates specific exclusions table
+            sb.AppendLine("CREATE TABLE IF NOT EXISTS ExclusionDates (");
+            sb.AppendLine("    RecordID INTEGER PRIMARY KEY AUTOINCREMENT");
+            sb.AppendLine("                     UNIQUE");
+            sb.AppendLine("                     NOT NULL,");
+            sb.AppendLine("    Date     DATE    NOT NULL");
+            sb.AppendLine(");");
+
+            // Updates user version 
+            sb.AppendLine("PRAGMA user_version = 1");
 
             return sb.ToString(); 
         }

@@ -105,6 +105,8 @@
     <Compile Include="Base Classes\Viewmodel Base\BaseViewmodel.cs" />
     <Compile Include="Database Management\Connection String System\ApplicationConnectionStringSystem.cs" />
     <Compile Include="Database Management\Database Construction System\DatabaseConstructor.cs" />
+    <Compile Include="Database Management\Database Construction System\DatabaseVersionRetrieval.cs" />
+    <Compile Include="Database Management\Database Retrieval System\SafeDatabaseRetrievalHelpers.cs" />
     <Compile Include="Enums\Page Types\ApplicationPageTypes.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

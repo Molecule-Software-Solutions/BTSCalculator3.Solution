@@ -30,7 +30,8 @@ namespace BTSCalculator.Core
                 }
                 finally
                 {
-                    conn.Close(); 
+                    conn.Close();
+                    conn.Dispose(); 
                 }
             }
         }

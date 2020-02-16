@@ -25,8 +25,6 @@ namespace BTSCalculator3
         public static readonly DependencyProperty LabelTextProperty =
             DependencyProperty.Register("LabelText", typeof(string), typeof(FriendlyLabeledDatePicker), new PropertyMetadata(string.Empty));
 
-
-
         public DateTime DateTimeSelected
         {
             get { return (DateTime)GetValue(DateTimeSelectedProperty); }

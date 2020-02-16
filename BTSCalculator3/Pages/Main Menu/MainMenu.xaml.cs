@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BTSCalculator.Core; 
 
 namespace BTSCalculator3
 {
@@ -20,8 +21,10 @@ namespace BTSCalculator3
     /// </summary>
     public partial class MainMenu : Page
     {
+        MainMenuViewmodel ViewModel = new MainMenuViewmodel(); 
         public MainMenu()
         {
+            DataContext = ViewModel;
             InitializeComponent();
         }
 

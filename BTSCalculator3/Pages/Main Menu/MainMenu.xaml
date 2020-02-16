@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!--Title Bar-->
-        <Border Margin="8" BorderBrush="{StaticResource TitleBarBorderYellow}" Background="{StaticResource TitleBarYellow}" BorderThickness="2 8 2 2" CornerRadius="0 0 10 10" Grid.ColumnSpan="2">
+        <Border Margin="8" BorderBrush="{StaticResource LinearBrushBorderBlue}" Background="{StaticResource LinearBrushBlue}" BorderThickness="2 8 2 2" CornerRadius="10" Grid.ColumnSpan="2">
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
@@ -39,7 +39,7 @@
         </Border>
         
         <!--Button Row-->
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="8" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 8 2 2" Background="{StaticResource TitleBarYellow}" CornerRadius="10">
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="8" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 8 2 2" Background="{StaticResource LinearBrushBlue}" CornerRadius="10">
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
@@ -48,21 +48,21 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 
                 <!--Exit Application Button-->
-                <Button x:Name="ExitApplicationButton" Click="ExitApplicationButton_Click" Margin="5" Padding="5" Background="DarkRed" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Exit Application" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 4 2 2" Width="150">
+                <Button x:Name="ExitApplicationButton" Click="ExitApplicationButton_Click" Margin="5" Padding="5" Background="{StaticResource LinearBrushRed}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Exit Application" BorderBrush="DimGray" BorderThickness="1" Width="150">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
 
                 <!--Holiday Manager Button-->
-                <Button Margin="5" Padding="5" Background="Purple" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Holiday Manager" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 4 2 2" Width="150">
+                <Button Margin="5" Padding="5" Background="{StaticResource LinearBrushPurple}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="System Settings"  BorderThickness="1" Width="150">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
 
                 <!--Calculate a New Bond Button-->
-                <Button Margin="5" Padding="5" Background="DarkGreen" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Produce Bond Form" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 4 2 2">
+                <Button Margin="5" Padding="5" Background="{StaticResource LinearBrushGreen}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Produce Bond Form"  BorderThickness="1" Command="{Binding ShowTestDialog_COMMAND}">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
@@ -71,7 +71,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="2" Grid.Column="0" Background="{StaticResource TitleBarYellow}" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 8 2 2" CornerRadius="0 0 10 10" Margin="8">
+        <Border Grid.Row="2" Grid.Column="0" Background="{StaticResource LinearBrushBlue}" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 8 2 2" CornerRadius="10" Margin="8">
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
@@ -90,11 +90,11 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel>
-                    <local:FriendlyLabeledTextBox LabelText="Date of Judgment" TextboxText="Test" TextboxMask="00/00/0000" Margin="5 5"/>
-                    <local:FriendlyLabeledTextBox LabelText="Next Rent Due Date" TextboxText="Test" TextboxMask="00/00/0000" Margin="5 5"/>
-                    <local:FriendlyLabeledDatePicker LabelText="Undisputed Rent In Arrears" Margin="5 5"/>
-                    <local:FriendlyLabeledTextBox LabelText="Disputed Rent In Arrears" TextboxText="Test" Margin="5 5"/>
-                    <local:FriendlyLabeledTextBox LabelText="Monthly Rental Rate" TextboxText="Test" Margin="5 5"/>
+                    <local:FriendlyLabeledDatePicker LabelText="Date of Judgment" Margin="5 5" DateTimeSelected="{Binding JudgmentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <local:FriendlyLabeledDatePicker LabelText="Next Rent Due Date" Margin="5 5" DateTimeSelected="{Binding RentDueDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <local:FriendlyLabeledTextBox LabelText="Undisputed Rent In Arrears" Margin="5 5" TextboxText="{Binding UndisputedArrears, StringFormat=C2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <local:FriendlyLabeledTextBox LabelText="Monthly Rental Rate" TextboxText="{Binding MonthlyRentalRate, StringFormat=C2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 5"/>
+                    <CheckBox Content="Defendant is Indigent" Foreground="White" FontSize="14" FontWeight="DemiBold" Margin="5 5" IsChecked="{Binding Indigent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </StackPanel>              
 
@@ -104,7 +104,7 @@
         </Border>
 
 
-        <Border Grid.Row="2" Grid.Column="1" Background="{StaticResource TitleBarYellow}" BorderBrush="{StaticResource TitleBarBorderYellow}" BorderThickness="2 8 2 2" CornerRadius="0 0 10 10" Margin="8">
+        <Border Grid.Row="2" Grid.Column="1" Background="{StaticResource LinearBrushBlue}" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 8 2 2" CornerRadius="10" Margin="8">
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
@@ -112,21 +112,20 @@
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
-                <Border Grid.Row="0" Margin="5" BorderBrush="{StaticResource TitleBarBorderYellow}" Background="{StaticResource BackgroundGray}" CornerRadius="0 0 10 10" BorderThickness="2 6 2 2">
+                <Button Grid.Row="0" Content="Calculate Bond" HorizontalAlignment="Center" Background="{StaticResource LinearBrushGreen}" Margin="5" Foreground="White" Height="40" FontSize="16" Width="150" FontWeight="Bold"/>
+                <Border Grid.Row="1" Margin="5" Background="{StaticResource LinearBrushCanvas}" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 6 2 2" CornerRadius="10">
                     <Border.Effect>
                         <DropShadowEffect/>
                     </Border.Effect>
-                    <StackPanel Margin="5">
-                        <TextBlock Text="Bond Modifiers" FontSize="16" FontWeight="Black" Foreground="{StaticResource TitleBarBorderYellow}" HorizontalAlignment="Center"/>
-                        <CheckBox Content="Dispute Arrears" Foreground="White" FontSize="14" FontWeight="DemiBold" Margin="5 5"/>
-                        <CheckBox Content="Defendant is Indigent" Foreground="White" FontSize="14" FontWeight="DemiBold" Margin="5 5"/>
+                    <StackPanel>
+                        <TextBlock Text="{Binding DateCalculation, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="DemiBold" Foreground="DarkGreen" Margin="5"/>
+                        <TextBlock Text="{Binding DateCalculation2, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="DemiBold" Foreground="DarkGreen" Margin="5"/>
+                        <Separator Margin="5" BorderThickness="4" BorderBrush="{StaticResource LinearBrushBorderBlue}"/>
+                        <TextBlock Text="{Binding PerDiemRent, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="DemiBold" Foreground="DarkGreen" Margin="5"/>
                     </StackPanel>
                 </Border>
-                
             </Grid>
             
             

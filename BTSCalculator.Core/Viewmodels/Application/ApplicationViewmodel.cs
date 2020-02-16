@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BTSCalculator.Core
@@ -12,20 +14,42 @@ namespace BTSCalculator.Core
         {
             if(TestConnectionState())
             {
-                DatabaseConstructor DC = new DatabaseConstructor();
-                DC.ConstructTables(new ApplicationConnectionStringSystem().ConnectionString);
+                Setup();
             }
+        }
+
+        private void Setup()
+        {
+            DatabaseMigrationSystem.CheckMigrationStatus();
+            GetCounty();
         }
 
         /// <summary>
         /// Indicates the current page that the application is displaying
         /// </summary>
         public ApplicationPageTypes CurrentPage { get; set; } = ApplicationPageTypes.MainMenu;
+        public IDialog CurrentDialog { get; set; }
+        public string County { get; set; }
+
+        public void ShowDialog(IDialog dialog)
+        {
+            CurrentDialog = dialog;
+        }
+
+        public RelayCommand CloseDialog_COMMAND => new RelayCommand(() =>
+        {
+            IDialog currentDialog = StaticAccessSystem.ApplicationVM.CurrentDialog;
+            currentDialog.DialogType = DialogTypes.None;
+            CurrentDialog.DialogYes = true;
+            // Forces property changed on current dialog
+            CurrentDialog = null;
+            // Populates current dialog with result of last dialog so that properties can be accessed
+            CurrentDialog = currentDialog;
+        });
 
         private bool TestConnectionState()
         {
-            ApplicationConnectionStringSystem css = new ApplicationConnectionStringSystem();
-            switch (css.TextConnection())
+            switch (ApplicationConnectionStringSystem.TextConnection())
             {
                 case System.Data.ConnectionState.Closed:
                     return false;
@@ -41,6 +65,42 @@ namespace BTSCalculator.Core
                     return false;
                 default:
                     return false;
+            }
+        }
+
+        private void GetCounty()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
+            {
+                using (SQLiteCommand comm = new SQLiteCommand(conn))
+                {
+                    comm.CommandText = @"SELECT * FROM SystemSettings WHERE SettingKey = @SettingValue;";
+                    comm.Parameters.AddWithValue("@SettingValue", "County");
+                    comm.Connection.Open();
+                    SQLiteDataReader reader = comm.ExecuteReader(); 
+                    try
+                    {
+                        if(reader.Read())
+                        {
+                            County = reader.GetSafeString("SettingValue");
+                        }
+                        else
+                        {
+                            ShowDialog(new DialogModel() { DialogHeader = "Error", DialogMessage = "Could not retrieve county name" });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowDialog(new DialogModel() { DialogHeader = "Error", DialogMessage = "Could not retrieve county name" });
+                        throw;
+                    }
+                    finally
+                    {
+                        comm.Connection.Close();
+                        comm.Connection.Dispose();
+                        comm.Dispose(); 
+                    }
+                }
             }
         }
     }

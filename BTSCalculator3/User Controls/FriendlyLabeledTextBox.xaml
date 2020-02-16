@@ -18,13 +18,13 @@
         </Grid.RowDefinitions>
         
         <!--Label-->
-        <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource BackgroundGray}" BorderBrush="{StaticResource TitleBarBorderYellow}" CornerRadius="10 10 0 0" BorderThickness="2 6 2 0" Margin="0 0 0 -2.25" Panel.ZIndex="2">
+        <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource BackgroundGray}" BorderBrush="{StaticResource LinearBrushBorderBlue}" CornerRadius="10 10 0 0" BorderThickness="2 6 2 0" Margin="0 0 0 -2.25" Panel.ZIndex="2">
             <TextBlock Text="{Binding LabelText, ElementName=FriendlyLabeledTextBox_UC, Mode=TwoWay}" HorizontalAlignment="Left" FontSize="14" FontWeight="DemiBold" Foreground="White" Padding="5 3"/>
         </Border>
         
         <!--TextBox-->
-        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource BackgroundGray}" BorderBrush="{StaticResource TitleBarBorderYellow}" CornerRadius="0 0 10 10" BorderThickness="2" >
-            <xceed:MaskedTextBox Mask="{Binding TextboxMask, ElementName=FriendlyLabeledTextBox_UC, Mode=TwoWay}" Text="{Binding TextboxText, ElementName=FriendlyLabeledTextBox_UC, Mode=TwoWay}" Background="{StaticResource TitleBarBorderYellow}" Margin="5 5" Foreground="Black" FontWeight="DemiBold" FontSize="14" AutoSelectBehavior="OnFocus"/>
+        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource BackgroundGray}" BorderBrush="#2d5986" CornerRadius="0 0 10 10" BorderThickness="2" >
+            <xceed:MaskedTextBox Mask="{Binding TextboxMask, ElementName=FriendlyLabeledTextBox_UC, Mode=TwoWay}" Text="{Binding TextboxText, ElementName=FriendlyLabeledTextBox_UC, Mode=TwoWay}" Margin="5 5" Foreground="Black" FontWeight="DemiBold" FontSize="14" AutoSelectBehavior="OnFocus"/>
         </Border>
     </Grid>
 </UserControl>

@@ -105,17 +105,22 @@
     <Compile Include="Base Classes\Viewmodel Base\BaseViewmodel.cs" />
     <Compile Include="Database Management\Connection String System\ApplicationConnectionStringSystem.cs" />
     <Compile Include="Database Management\Database Construction System\DatabaseConstructor.cs" />
+    <Compile Include="Database Management\Database Construction System\DatabaseMigrationSystem.cs" />
     <Compile Include="Database Management\Database Construction System\DatabaseVersionRetrieval.cs" />
+    <Compile Include="Database Management\Database Construction System\Migration\Version1ToVersion2Migration.cs" />
     <Compile Include="Database Management\Database Retrieval System\SafeDatabaseRetrievalHelpers.cs" />
+    <Compile Include="Enums\DialogTypes\DialogTypes.cs" />
     <Compile Include="Enums\Page Types\ApplicationPageTypes.cs" />
+    <Compile Include="Interfaces\IDialog.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
+    <Compile Include="Models\Dialog\DialogModel.cs" />
+    <Compile Include="Models\ExclusionDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Viewmodels\Application\ApplicationViewmodel.cs" />
     <Compile Include="Viewmodels\Main Menu\MainMenuViewmodel.cs" />
     <Compile Include="Viewmodels\Static Viewmodel System\StaticAccessSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>

@@ -8,8 +8,12 @@
         mc:Ignorable="d"
         Background="{StaticResource BackgroundGray}"
         Title="Bond to Stay Calculator" Height="600" Width="800">
-    <Frame x:Name="WindowContentFrame">
-        
-    </Frame>
+    <Grid>
+        <Frame x:Name="WindowContentFrame" Panel.ZIndex="0" NavigationUIVisibility="Hidden">
 
+        </Frame>
+        <Frame x:Name="DialogContentFrame" Panel.ZIndex="1" NavigationUIVisibility="Hidden">
+            
+        </Frame>
+    </Grid>
 </Window>

@@ -3,7 +3,7 @@
     public enum ApplicationPageTypes
     {
         MainMenu,
-        EnterCaseInformation,
+        ApplicationSetup,
         BidResultsScreen,
         CompleteFormPage,
     }

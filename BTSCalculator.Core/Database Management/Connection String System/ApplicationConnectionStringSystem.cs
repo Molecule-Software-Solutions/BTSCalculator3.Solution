@@ -14,9 +14,9 @@ namespace BTSCalculator.Core
             ConnectionString = ConnectionStringBuilder(); 
         }
 
-        public ConnectionState TextConnection()
+        public static ConnectionState TextConnection()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(ConnectionString))
+            using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
             {
                 try
                 {

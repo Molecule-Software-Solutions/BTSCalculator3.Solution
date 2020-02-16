@@ -10,18 +10,18 @@ namespace BTSCalculator.Core
         /// Calls the various methods necessary to construct the database tables
         /// </summary>
         /// <param name="connectionString"></param>
-        public void ConstructTables(string connectionString)
+        public void ConstructTables()
         {
-            ConstructHolidayTable(connectionString);
+            ConstructHolidayTable();
         }
 
         /// <summary>
         /// Constructs the holiday table within the database 
         /// </summary>
         /// <param name="connectionString"></param>
-        private void ConstructHolidayTable(string connectionString)
+        private void ConstructHolidayTable()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
             {
                 using (SQLiteCommand comm = new SQLiteCommand(conn))
                 {

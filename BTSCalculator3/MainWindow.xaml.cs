@@ -22,6 +22,7 @@ namespace BTSCalculator3
     public partial class MainWindow : Window
     {
         ApplicationViewmodel ViewModel;
+
         public MainWindow()
         {
             ViewModel = StaticAccessSystem.ApplicationVM;
@@ -46,6 +47,23 @@ namespace BTSCalculator3
             if(e.PropertyName == nameof(ViewModel.CurrentPage))
             {
                 WindowContentFrame.Content = ViewModel.CurrentPage.GetApplicationPage();
+            }
+            if(e.PropertyName == nameof(ViewModel.CurrentDialog))
+            {
+                if(ViewModel.CurrentDialog == null)
+                {
+                    DialogContentFrame.Content = null;
+                    return;
+                }
+                if(ViewModel.CurrentDialog.DialogType == DialogTypes.None)
+                {
+                    DialogContentFrame.Content = null;
+                    return;
+                }
+                else
+                {
+                    DialogContentFrame.Content = ViewModel.CurrentDialog.GetDialogPage();
+                }
             }
         }
     }

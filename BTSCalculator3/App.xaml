@@ -5,7 +5,50 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="BackgroundGray" Color="#404040"/>
-        <SolidColorBrush x:Key="TitleBarYellow" Color="#131339"/>
-        <SolidColorBrush x:Key="TitleBarBorderYellow" Color="#e6e6e6"/>
+        <SolidColorBrush x:Key="TitleBarYellow" Color="#336699"/>
+        <SolidColorBrush x:Key="TitleBarBorderYellow" Color="#804000"/>
+        <SolidColorBrush x:Key="JudicialBlue" Color="#9DB9C8"/>
+
+
+
+        <LinearGradientBrush x:Key="LinearBrushBorderBlue" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="#336699" Offset="0"/>
+            <GradientStop Color="#4080bf" Offset="0.85"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushBorderGold" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="#997a00" Offset="0"/>
+            <GradientStop Color="#fff5cc" Offset=".85"/>
+            <GradientStop Color="Gray" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushRed" StartPoint="0, 1" EndPoint="0, 0">
+            <GradientStop Color="#4d0000" Offset="0"/>
+            <GradientStop Color="#660000" Offset=".65"/>
+            <GradientStop Color="LightGray" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushPurple" StartPoint="0, 1" EndPoint="0, 0">
+            <GradientStop Color="#4d004d" Offset="0"/>
+            <GradientStop Color="#660066" Offset=".65"/>
+            <GradientStop Color="LightGray" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushGreen" StartPoint="0, 1" EndPoint="0, 0">
+            <GradientStop Color="#264d00" Offset="0"/>
+            <GradientStop Color="#408000" Offset=".65"/>
+            <GradientStop Color="LightGray" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushBlue" StartPoint="0, 1" EndPoint="0, 0">
+            <GradientStop Color="#000033" Offset="0"/>
+            <GradientStop Color="#2d5986" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LinearBrushCanvas" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="#b8b3ad" Offset="0"/>
+            <GradientStop Color="#faf2e8" Offset="1"/>
+        </LinearGradientBrush>
     </Application.Resources>
 </Application>

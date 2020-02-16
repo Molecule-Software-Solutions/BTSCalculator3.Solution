@@ -1,0 +1,58 @@
+﻿<Page x:Class="BTSCalculator3.StandardDialogPage" x:Name="StandardDialog_PG"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BTSCalculator3"
+      mc:Ignorable="d" 
+     >
+    <Page.Resources>
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Grid>
+        <Rectangle Panel.ZIndex="0" Fill="Black" Opacity=".5" Height="auto" Width="auto"/>
+        <Border Panel.ZIndex="1" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="4" Background="{StaticResource LinearBrushBlue}" CornerRadius="10"  MinWidth="500" MinHeight="200" MaxHeight="350" MaxWidth="550" Height="auto" Width="auto">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+            <Grid x:Name="grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header for dialog -->
+                <Border Grid.Row="0" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="3" Background="{StaticResource LinearBrushBlue}" CornerRadius="0 0 10 10" Margin="5">
+                    <Border.Effect>
+                        <DropShadowEffect/>
+                    </Border.Effect>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DialogHeader, ElementName=StandardDialog_PG}" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                </Border>
+
+                <!--Page Content-->
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <TextBlock Margin="10 25 10 5" TextWrapping="WrapWithOverflow" FontSize="12" FontWeight="DemiBold" Text="{Binding DialogMessage, ElementName=StandardDialog_PG}" Foreground="White"/>
+                </ScrollViewer>
+
+                <!--Ok Button-->
+                <Button x:Name="OkButton" Grid.Row="2" Background="{StaticResource LinearBrushGreen}" Content="Ok" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="150" Foreground="White" Margin="5 5 5 15" Command="{Binding CloseDialog_COMMAND}">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

@@ -42,9 +42,7 @@
                 </Border>
 
                 <!--Page Content-->
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Margin="10 25 10 5" TextWrapping="WrapWithOverflow" FontSize="12" FontWeight="DemiBold" Text="{Binding DialogMessage, ElementName=StandardDialog_PG}" Foreground="White"/>
-                </ScrollViewer>
+                <TextBlock Grid.Row="1" Margin="10 25 10 5" TextWrapping="Wrap" FontSize="12" FontWeight="DemiBold" Text="{Binding DialogMessage, ElementName=StandardDialog_PG}" Foreground="White"/>
 
                 <!--Ok Button-->
                 <Button x:Name="OkButton" Grid.Row="2" Background="{StaticResource LinearBrushGreen}" Content="Ok" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="150" Foreground="White" Margin="5 5 5 15" Command="{Binding CloseDialog_COMMAND}">

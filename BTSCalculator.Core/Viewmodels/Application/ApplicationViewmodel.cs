@@ -21,7 +21,7 @@ namespace BTSCalculator.Core
         private void Setup()
         {
             DatabaseMigrationSystem.CheckMigrationStatus();
-            GetCounty();
+            County = CountyNameManagement.GetCountyName(); 
         }
 
         /// <summary>
@@ -65,42 +65,6 @@ namespace BTSCalculator.Core
                     return false;
                 default:
                     return false;
-            }
-        }
-
-        private void GetCounty()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
-            {
-                using (SQLiteCommand comm = new SQLiteCommand(conn))
-                {
-                    comm.CommandText = @"SELECT * FROM SystemSettings WHERE SettingKey = @SettingValue;";
-                    comm.Parameters.AddWithValue("@SettingValue", "County");
-                    comm.Connection.Open();
-                    SQLiteDataReader reader = comm.ExecuteReader(); 
-                    try
-                    {
-                        if(reader.Read())
-                        {
-                            County = reader.GetSafeString("SettingValue");
-                        }
-                        else
-                        {
-                            ShowDialog(new DialogModel() { DialogHeader = "Error", DialogMessage = "Could not retrieve county name" });
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowDialog(new DialogModel() { DialogHeader = "Error", DialogMessage = "Could not retrieve county name" });
-                        throw;
-                    }
-                    finally
-                    {
-                        comm.Connection.Close();
-                        comm.Connection.Dispose();
-                        comm.Dispose(); 
-                    }
-                }
             }
         }
     }

@@ -12,140 +12,161 @@ namespace BTSCalculator.Core
     {
         public MainMenuViewmodel()
         {
-            SubscriptionSystem();
+            SetupDataItems(); 
             ShowSetupErrors(); 
+        }
+
+        private void SetupDataItems()
+        {
+            // Fills collections 
+            Holidays = RetrieveDates.RetrieveHolidays();
+            ExclusionDates = RetrieveDates.RetrieveExclusionDates();
+
+            // Creates a list that will contain all dates
+            List<ExclusionDate> combinedList = new List<ExclusionDate>();
+
+            // Adds all dates to the list
+            foreach (ExclusionDate exclusionDate in Holidays)
+            {
+                combinedList.Add(exclusionDate);
+            }
+            foreach (ExclusionDate exclusionDate1 in ExclusionDates)
+            {
+                combinedList.Add(exclusionDate1);
+            }
+
+            // Sets Exclusion Dates Array for use during calculations
+            SetupExclusionsArray(combinedList); 
+        }
+
+        private void SetupExclusionsArray(List<ExclusionDate> combinedList)
+        {
+            ExclusionDatesArray = combinedList.ToArray();
         }
 
         private void ShowSetupErrors()
         {
             string dialogErrors = string.Empty;
+            bool showDialog = false; 
             if(StaticAccessSystem.ApplicationVM.County == "NOT SET")
             {
                 dialogErrors += "COUNTY NAME IS NOT SET\n";
+                showDialog = true;
             }
-            // other test to check for list
-            dialogErrors += "HOLIDAY / CLOSINGS LIST CONTAINS NO DATES\n";
-
-            StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel()
+            if(ExclusionDatesArray.Length == 0)
             {
-                DialogType = DialogTypes.Standard,
-                DialogHeader = "Setup Errors Detected",
-                DialogMessage = "The following setup errors have been detected\n\n" + dialogErrors +
-                "\nPlease use the setup system to correct these issues before proceeding"
-            });
+                dialogErrors += "HOLIDAY AND EXCLUSION DATES HAVE NOT BEEN SET\n";
+                showDialog = true;  
+            }
+
+            if(showDialog)
+            {
+                StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel()
+                {
+                    DialogType = DialogTypes.Standard,
+                    DialogHeader = "Setup Errors Detected",
+                    DialogMessage = "The following setup errors have been detected\n\n" + dialogErrors +
+                                    "\nPlease use the setup system to correct these issues before proceeding"
+                });
+            }
         }
 
-        private void SubscriptionSystem()
-        {
-            PropertyChanged += MainMenuViewmodel_PropertyChanged;
-        }
-
-        private void MainMenuViewmodel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-
-        }
         public DateTime JudgmentDate { get; set; } = DateTime.Today;
         public DateTime RentDueDate { get; set; } = DateTime.Now.AddMonths(1).AddDays(-DateTime.Now.Day + 1);
         public decimal UndisputedArrears { get; set; }
+        public decimal UndisputedArrearsFromCalculation { get; set; }
         public decimal MonthlyRentalRate { get; set; }
-        public bool DisputesArrears { get; set; }
         public bool Indigent { get; set; }
-
-        public int DateCalculation { get; set; }
-        public int DateCalculation2 { get; set; }
-        public decimal PerDiemRent { get; set; }
+        public int BusinessDayCount { get; private set; }
+        public int TotalDayCount { get; private set; }
+        public decimal PerDiemRentDue { get; private set; }
+        public decimal PerDiemRentRate { get; private set; }
+        public decimal TotalDueToday { get; set; }
+        public decimal TotalDueOnRentDate { get; set; }
+        public decimal TotalCourtCostsDue { get; set; }
+        public bool ShouldPerDiemRentBeCollected { get; set; }
+        public bool ShouldUndisputedRentBeCollected { get; set; }
+        public bool ShouldCourtCostsBeCollected { get; set; }
 
         /// <summary>
         /// Contains a list of exclusion dates stored in the database
         /// </summary>
-        public ObservableCollection<ExclusionDate> ExclusionDates { get; set; } = new ObservableCollection<ExclusionDate>(); 
+        public ObservableCollection<ExclusionDate> ExclusionDates { get; private set; } = new ObservableCollection<ExclusionDate>();
 
-        private decimal RecalculateArrearsToBePaid()
-        {
-            throw new NotImplementedException(); 
-        }
+        /// <summary>
+        /// Contains a list of Holidays stored in the database 
+        /// </summary>
+        public ObservableCollection<ExclusionDate> Holidays { get; private set; } = new ObservableCollection<ExclusionDate>(); 
 
-        private decimal RecalculateRentToBePaid()
-        {
-            throw new NotImplementedException();
-        }
+        public ExclusionDate[] ExclusionDatesArray { get; set; }
 
-        private decimal RecalculatePerDiem()
+        public RelayCommand CalculateBond_COMMAND => new RelayCommand(() =>
         {
-            throw new NotImplementedException();
-        }
+            // Error if no holidays or exclusion dates are present
+            //if(ExclusionDatesArray.Length == 0)
+            //{
+            //    StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "Holiday and Exclusion Date Error", DialogMessage = "At least one holiday or exclusion date must be entered prior to calculating a bond. Please add holidays or exclusion dates in System Setup" });
+            //    return;
+            //}
 
-        private decimal CalculateTotal()
-        {
-            throw new NotImplementedException();
-        }
+            // Performs calculations and populates all calculation properties 
+            DateTime[] datesFromExclusionArray = ExclusionDatesArray.Select(c => c.Date).ToArray();
+            BusinessDayCount = Calculations.CalculateBusinessTimeSpan(JudgmentDate, RentDueDate, datesFromExclusionArray);
+            TotalDayCount = Calculations.CalculateTotalTimeSpan(JudgmentDate, RentDueDate);
 
-        private int ExclusionDateCount(DateTime start, DateTime end, DateTime[] exclusionDates)
-        {
-            DateTime sd = start;
-            sd = sd.AddDays(1.0);
-            DateTime ed = end;
-            int exclusionCount = 0;
-            while(DateTime.Compare(sd, ed) <= 0)
+            // If indigent, calculates the per diem rental rate and amount due... else sets these amounts to 0
+            if(!Indigent)
             {
-                if(sd.DayOfWeek == DayOfWeek.Saturday || sd.DayOfWeek == DayOfWeek.Sunday)
+                if (BusinessDayCount > 5)
                 {
-                    exclusionCount += 1;
+                    PerDiemRentDue = Calculations.CalculatePerDiemRent(MonthlyRentalRate, JudgmentDate, RentDueDate);
+                    PerDiemRentRate = Calculations.CalculatePerDiemRate(MonthlyRentalRate, JudgmentDate, RentDueDate);
+                    TotalCourtCostsDue = 150;
+                    UndisputedArrearsFromCalculation = UndisputedArrears;
+                    ShouldPerDiemRentBeCollected = true;
+                    ShouldCourtCostsBeCollected = true;
+                    ShouldUndisputedRentBeCollected = true;
                 }
                 else
                 {
-                    foreach (DateTime dateTime in exclusionDates)
-                    {
-                        if (sd == dateTime)
-                        {
-                            exclusionCount += 1;
-                        }
-                    }
+                    PerDiemRentDue = 0;
+                    PerDiemRentRate = 0;
+                    TotalCourtCostsDue = 150;
+                    UndisputedArrearsFromCalculation = UndisputedArrears;
+                    ShouldPerDiemRentBeCollected = false;
+                    ShouldCourtCostsBeCollected = true;
+                    ShouldUndisputedRentBeCollected = true;
                 }
-                sd = sd.AddDays(1);
             }
-            return exclusionCount;
-        }
-
-        private decimal CalculatePerDiemRent(DateTime[] exclusionDates)
-        {
-            return (MonthlyRentalRate / 30) * CalculateBusinessTimeSpan(JudgmentDate, RentDueDate, exclusionDates);
-        }
-
-        private int CalculateTotalTimeSpan(DateTime start, DateTime end)
-        {
-            int comparison = DateTime.Compare(start, end);
-            if (comparison == 0) return 0;
-            if (comparison > 0) return -1;
-            if (comparison < 0)
+            else
             {
-                TimeSpan ts = end - start;
-                return ts.Days;
+                PerDiemRentDue = 0;
+                PerDiemRentRate = 0;
+                TotalCourtCostsDue = 0;
+                UndisputedArrearsFromCalculation = 0;
+                ShouldUndisputedRentBeCollected = false;
+                ShouldPerDiemRentBeCollected = false;
+                ShouldCourtCostsBeCollected = false;
             }
-            return -00;
-        }
 
-        private int CalculateBusinessTimeSpan(DateTime start, DateTime end, DateTime[] exclusionDates)
-        {
-            int comparison = DateTime.Compare(start, end);
-            if (comparison == 0) return 0;
-            if (comparison > 0) return -1;
-            if (comparison < 0)
-            {
-                TimeSpan ts = end - start;
-                return ts.Days - ExclusionDateCount(start, end, exclusionDates);
-            }
-            return -99;
-        }
-
-        public RelayCommand ShowTestDialog_COMMAND => new RelayCommand(() =>
-        {
-            DateTime[] dtexc = new DateTime[5];
-            dtexc[0] = DateTime.Parse("2/17/2020");
-            DateCalculation = CalculateBusinessTimeSpan(JudgmentDate, RentDueDate, dtexc);
-            DateCalculation2 = CalculateTotalTimeSpan(JudgmentDate, RentDueDate);
-            PerDiemRent = CalculatePerDiemRent(dtexc);
+            // Calculates the total due
+            CalculateTotalDue(); 
         });
 
+        private void CalculateTotalDue()
+        {
+            TotalDueToday = PerDiemRentDue + UndisputedArrears + TotalCourtCostsDue;
+            TotalDueOnRentDate = MonthlyRentalRate;
+        }
+
+        public RelayCommand GoToSystemSetup_COMMAND => new RelayCommand(() =>
+        {
+            StaticAccessSystem.ApplicationVM.CurrentPage = ApplicationPageTypes.ApplicationSetup;
+        });
+
+        public RelayCommand GoToFormGenerator_COMMAND => new RelayCommand(() =>
+        {
+
+        });
     }
 }

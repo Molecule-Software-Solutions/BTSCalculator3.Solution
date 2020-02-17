@@ -17,6 +17,7 @@ namespace BTSCalculator3
                 case ApplicationPageTypes.MainMenu:
                     return new MainMenu();
                 case ApplicationPageTypes.ApplicationSetup:
+                    return new SystemSettingsPage();
                 case ApplicationPageTypes.BidResultsScreen:
                 case ApplicationPageTypes.CompleteFormPage:
                 default:

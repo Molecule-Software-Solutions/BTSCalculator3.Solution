@@ -97,6 +97,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\System Settings\SystemSettingsPage.xaml.cs">
+      <DependentUpon>SystemSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\Dialog Pages\StandardDialogPage.xaml.cs">
       <DependentUpon>StandardDialogPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,8 @@
       <DependentUpon>FriendlyLabeledTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Value Converters\Application Pages\ApplicationPageConverters.cs" />
+    <Compile Include="Value Converters\Boolean Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Value Converters\Boolean Converters\BooleanToYesNoConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Main Menu\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\System Settings\SystemSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

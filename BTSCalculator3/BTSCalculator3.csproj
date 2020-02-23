@@ -97,6 +97,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\Form Generator\FormGeneratorPage.xaml.cs">
+      <DependentUpon>FormGeneratorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\System Settings\SystemSettingsPage.xaml.cs">
       <DependentUpon>SystemSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Form Generator\FormGeneratorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Main Menu\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +190,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="btsc_01%281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="COPYING.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GNU General Public License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

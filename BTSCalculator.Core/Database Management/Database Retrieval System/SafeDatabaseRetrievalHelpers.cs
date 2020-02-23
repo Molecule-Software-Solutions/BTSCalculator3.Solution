@@ -37,5 +37,13 @@ namespace BTSCalculator.Core
             }
             else return 0;
         }
+
+        public static decimal GetSafeDecimal(this SQLiteDataReader reader, string columnName)
+        {
+            if(reader.GetType() != typeof(DBNull)) {
+                return Convert.ToDecimal(reader[columnName]);
+            }
+            else return 0;
+        }
     }
 }

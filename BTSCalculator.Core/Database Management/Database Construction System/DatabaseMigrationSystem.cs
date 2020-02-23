@@ -14,6 +14,10 @@
             {
                 Version1ToVersion2Migration.PerformMigration();
             }
+            if(DatabaseVersionRetrieval.GetDatabaseVersion() == 2)
+            {
+                Version2ToVersion3Migration.PerformMigration(); 
+            }
         }
     }
 }

@@ -66,7 +66,7 @@
                 </Button>
 
                 <!--Calculate a New Bond Button-->
-                <Button Margin="5" Padding="5" Background="{StaticResource LinearBrushGreen}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Produce Bond Form"  BorderThickness="1" Command="{Binding ShowTestDialog_COMMAND}">
+                <Button Margin="5" Padding="5" Background="{StaticResource LinearBrushGreen}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Produce Bond Form"  BorderThickness="1" Command="{Binding GoToFormGenerator_COMMAND, UpdateSourceTrigger=PropertyChanged}">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
@@ -129,7 +129,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Business Days Until Rent Payment Due:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Business days until rent payment due:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding BusinessDayCount, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -139,7 +139,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Total Days Until Next Rent Payment Due:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Total days until rent payment due:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalDayCount, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -149,7 +149,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Per Diem Rental Rate:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Per Diem rental rate:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding PerDiemRentRate, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -159,7 +159,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Per Diem Rent Total:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Per Diem rent total:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding PerDiemRentDue, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -169,7 +169,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Per Diem Rent Be Collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Per Diem rent be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding ShouldPerDiemRentBeCollected, Converter={StaticResource YesNoConverter}, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -179,7 +179,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Undisputed Rent To Be Collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Undisputed rent to be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding UndisputedArrearsFromCalculation, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -189,7 +189,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Undisputed Rent Be Collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should undisputed rent be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding ShouldUndisputedRentBeCollected, Converter={StaticResource YesNoConverter}, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -199,7 +199,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Court Costs To Be Collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Court Costs to be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalCourtCostsDue, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -209,37 +209,37 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Court Costs Be Collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Court Costs be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding ShouldCourtCostsBeCollected, Converter={StaticResource YesNoConverter}, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
                         <Separator BorderBrush="DarkBlue" BorderThickness="4"/>
 
                         <!-- Total Due Today -->
-                        <Grid Margin="5" >
+                        <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Total Due Today:" Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold"/>
-                            <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalDueToday, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="16" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="TOTAL DUE TODAY:" Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold" />
+                            <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalDueToday, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="16" FontWeight="DemiBold" />
                         </Grid>
 
                         <!-- Total Due On Rent Payment Dates -->
-                        <Grid Margin="5" >
+                        <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5 0 0 0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Total Due on " Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold"/>
-                                    <TextBlock Text="{Binding RentDueDate, StringFormat=MM/dd/yyyy, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold"/>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="TOTAL DUE ON: " Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold" />
+                                    <TextBlock Text="{Binding RentDueDate, StringFormat=MM/dd/yyyy, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="16" FontWeight="DemiBold" />
                                 </StackPanel>
-                                <TextBlock Text="And On Due Date Thereafter" Foreground="DarkBlue" FontSize="10" FontWeight="DemiBold"/>
+                                <TextBlock Text="(This amount will be due on due dates thereafter)" Foreground="DarkBlue" FontSize="10" FontWeight="DemiBold" />
                             </StackPanel>
 
-                            <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalDueOnRentDate, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="16" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding TotalDueOnRentDate, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="16" FontWeight="DemiBold" />
                         </Grid>
                     </StackPanel>
                 </Border>

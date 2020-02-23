@@ -121,7 +121,7 @@ namespace BTSCalculator.Core
                 {
                     PerDiemRentDue = Calculations.CalculatePerDiemRent(MonthlyRentalRate, JudgmentDate, RentDueDate);
                     PerDiemRentRate = Calculations.CalculatePerDiemRate(MonthlyRentalRate, JudgmentDate, RentDueDate);
-                    TotalCourtCostsDue = 150;
+                    TotalCourtCostsDue = StaticAccessSystem.ApplicationVM.DefaultCosts;
                     UndisputedArrearsFromCalculation = UndisputedArrears;
                     ShouldPerDiemRentBeCollected = true;
                     ShouldCourtCostsBeCollected = true;
@@ -131,7 +131,7 @@ namespace BTSCalculator.Core
                 {
                     PerDiemRentDue = 0;
                     PerDiemRentRate = 0;
-                    TotalCourtCostsDue = 150;
+                    TotalCourtCostsDue = StaticAccessSystem.ApplicationVM.DefaultCosts;
                     UndisputedArrearsFromCalculation = UndisputedArrears;
                     ShouldPerDiemRentBeCollected = false;
                     ShouldCourtCostsBeCollected = true;
@@ -140,13 +140,29 @@ namespace BTSCalculator.Core
             }
             else
             {
-                PerDiemRentDue = 0;
-                PerDiemRentRate = 0;
-                TotalCourtCostsDue = 0;
-                UndisputedArrearsFromCalculation = 0;
-                ShouldUndisputedRentBeCollected = false;
-                ShouldPerDiemRentBeCollected = false;
-                ShouldCourtCostsBeCollected = false;
+                if(BusinessDayCount > 5)
+                {
+                    PerDiemRentDue = Calculations.CalculatePerDiemRent(MonthlyRentalRate, JudgmentDate, RentDueDate);
+                    PerDiemRentRate = Calculations.CalculatePerDiemRate(MonthlyRentalRate, JudgmentDate, RentDueDate);
+                    TotalCourtCostsDue = 0;
+                    UndisputedArrearsFromCalculation = 0;
+                    ShouldUndisputedRentBeCollected = false;
+                    ShouldPerDiemRentBeCollected = true;
+                    ShouldCourtCostsBeCollected = false;
+                }
+                else
+                {
+                    PerDiemRentDue = 0;
+                    PerDiemRentRate = 0;
+                    TotalCourtCostsDue = 0;
+                    UndisputedArrearsFromCalculation = 0;
+                    ShouldUndisputedRentBeCollected = false;
+                    ShouldPerDiemRentBeCollected = false;
+                    ShouldCourtCostsBeCollected = false;
+                }
+
+
+
             }
 
             // Calculates the total due
@@ -155,7 +171,7 @@ namespace BTSCalculator.Core
 
         private void CalculateTotalDue()
         {
-            TotalDueToday = PerDiemRentDue + UndisputedArrears + TotalCourtCostsDue;
+            TotalDueToday = PerDiemRentDue + UndisputedArrearsFromCalculation + TotalCourtCostsDue;
             TotalDueOnRentDate = MonthlyRentalRate;
         }
 
@@ -166,7 +182,7 @@ namespace BTSCalculator.Core
 
         public RelayCommand GoToFormGenerator_COMMAND => new RelayCommand(() =>
         {
-
+            StaticAccessSystem.ApplicationVM.CurrentPage = ApplicationPageTypes.CompleteFormPage;
         });
     }
 }

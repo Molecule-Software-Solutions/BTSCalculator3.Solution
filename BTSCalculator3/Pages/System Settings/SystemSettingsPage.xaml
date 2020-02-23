@@ -53,6 +53,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -62,23 +63,27 @@
             
             <!--County Name Settings-->
             <local:FriendlyLabeledTextBox Grid.Row="0" Grid.Column="0" LabelText="County Name" TextboxText="{Binding CountyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-            <Button Grid.Row="0" Grid.Column="1" Height="40" Margin="5" Content="Save County Name" Foreground="White" Background="{StaticResource LinearBrushPurple}" VerticalAlignment="Bottom" Command="{Binding SetCountyName_COMMAND, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="1" Grid.Column="0" Height="20" Margin="5" Content="Save County Name" Foreground="White" Background="{StaticResource LinearBrushPurple}" VerticalAlignment="Bottom" Command="{Binding SetCountyName_COMMAND, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <!--Court Cost Option-->
+            <local:FriendlyLabeledTextBox Grid.Row="0" Grid.Column="1" LabelText="Default Court Cost" TextboxText="{Binding DefaultCosts, Mode=TwoWay, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <Button Grid.Row="1" Grid.Column="1" Height="20" Margin="5" Content="Save Default Court Costs" Foreground="White" Background="{StaticResource LinearBrushPurple}" VerticalAlignment="Bottom" Command="{Binding SetCosts_COMMAND, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Exclusion Date Management -->
-            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">
                 <local:FriendlyLabeledDatePicker Grid.Row="1" Grid.Column="0" LabelText="Exclusion Date To Add" Margin="5" DateTimeSelected="{Binding WorkingExclusionDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="Add Exclusion Date" Background="{StaticResource LinearBrushGreen}" Foreground="White" Margin="5" Height="40" Command="{Binding AddExclusionDate_COMMAND, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             
             
             <!-- Holiday Date Management -->
-            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
                 <local:FriendlyLabeledDatePicker Grid.Row="1" Grid.Column="0" LabelText="Holiday Date To Add" Margin="5" DateTimeSelected="{Binding WorkingHoliday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="Add Holiday" Background="{StaticResource LinearBrushGreen}" Foreground="White" Margin="5" Height="40" Command="{Binding AddHoliday_COMMAND, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             
             <!-- Exclusion Dates Added and Delete Button-->
-            <Grid Grid.Row="2" Grid.Column="0" Margin="5">
+            <Grid Grid.Row="3" Grid.Column="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
@@ -101,7 +106,7 @@
             </Grid>
 
             <!-- Holiday Dates Added and Delete Button-->
-            <Grid Grid.Row="2" Grid.Column="1" Margin="5">
+            <Grid Grid.Row="3" Grid.Column="1" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>

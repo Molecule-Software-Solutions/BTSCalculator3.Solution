@@ -20,6 +20,7 @@ namespace BTSCalculator3
                     return new SystemSettingsPage();
                 case ApplicationPageTypes.BidResultsScreen:
                 case ApplicationPageTypes.CompleteFormPage:
+                    return new FormGeneratorPage();
                 default:
                     return new Page();
             }

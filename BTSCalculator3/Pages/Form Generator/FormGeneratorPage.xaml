@@ -1,0 +1,137 @@
+﻿<Page x:Class="BTSCalculator3.FormGeneratorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BTSCalculator3"
+      Background="{StaticResource BackgroundGray}"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Title Bar-->
+        <Border Margin="8" BorderBrush="{StaticResource LinearBrushBorderBlue}" Background="{StaticResource LinearBrushBlue}" BorderThickness="2 8 2 2" CornerRadius="10" Grid.ColumnSpan="2">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+
+            <!--Header Text-->
+            <TextBlock Margin="8" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Civil Bond to Stay Calculator - Form Generator" FontSize="18" FontWeight="DemiBold" Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </Border>
+
+
+        <!--Button Row-->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="8" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 8 2 2" Background="{StaticResource LinearBrushBlue}" CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+
+            <!--Button Stackpanel-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <!-- Return to Main Menu Button -->
+                <Button Margin="5" Padding="5" Background="{StaticResource LinearBrushRed}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Return to Main Menu" BorderBrush="DimGray" BorderThickness="1" Width="200" Command="{Binding ReturnToMainMenu_COMMAND, UpdateSourceTrigger=PropertyChanged}">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Party Information Grid -->
+        <Grid Grid.Row="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Case Number -->
+            <TextBlock Text="Case Number (NEW CVD FILE)" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+            <!--Plaintiff Name-->
+            <TextBlock Grid.Row="1" Text="Plaintiff Name" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 15 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5 15 5 5"/>
+            
+            <!--Defendant Name-->
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Defendant Name" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 25 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="5 25 5 5"/>
+            
+            <!--Plaintiff Address-->
+            <TextBlock Grid.Row="2" Text="Plaintiff Address" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+
+            <!--Defendant Address-->
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Defendant Address" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="5"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Margin="5"/>
+
+            <!--Plaintiff City/State/Zip-->
+            <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="City" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="State" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="5" Margin="5"/>
+            </Grid>
+            
+            <!--Defendant City/State/Zip-->
+            <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="City" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="State" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="5" Margin="5"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

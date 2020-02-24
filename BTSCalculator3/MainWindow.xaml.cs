@@ -1,4 +1,6 @@
 ﻿using BTSCalculator.Core;
+using System;
+using System.Timers;
 using System.Windows;
 
 namespace BTSCalculator3
@@ -17,7 +19,24 @@ namespace BTSCalculator3
             InitializeComponent();
             ViewmodelPropertyChangeMonitor();
             SetDefaultPage();
-            EventMonitor(); 
+            EventMonitor();
+            SpecialNoticeTimer();
+        }
+
+        private void SpecialNoticeTimer()
+        {
+            SpecialNoticeFrame.Content = new SpecialNoticePage();
+            Timer tmr = new Timer(4000);
+            tmr.Elapsed += Tmr_Elapsed;
+            tmr.Start();
+        }
+
+        private void Tmr_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                SpecialNoticeFrame.Content = null;
+            });
         }
 
         private void SetDefaultPage()

@@ -115,6 +115,9 @@
     <Compile Include="User Controls\FriendlyLabeledTextBox.xaml.cs">
       <DependentUpon>FriendlyLabeledTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Controls\Special Notice\SpecialNoticePage.xaml.cs">
+      <DependentUpon>SpecialNoticePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Value Converters\Application Pages\ApplicationPageConverters.cs" />
     <Compile Include="Value Converters\Boolean Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Value Converters\Boolean Converters\BooleanToYesNoConverter.cs" />
@@ -156,6 +159,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="User Controls\FriendlyLabeledTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Controls\Special Notice\SpecialNoticePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

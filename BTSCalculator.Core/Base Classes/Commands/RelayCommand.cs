@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Provides a base relay command for use by all <see cref="BaseViewmodel"/> instances 
+    /// </summary>
     public class RelayCommand : ICommand
     {
         #region Private Members 

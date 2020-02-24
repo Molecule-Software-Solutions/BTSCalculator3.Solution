@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Viewmodel that controls the UI's System Setup page
+    /// </summary>
     public class SystemSetupViewmodel : BaseViewmodel
     {
         #region Private Members and Backing Fields 

@@ -79,6 +79,15 @@ namespace BTSCalculator.Core
         #region Private Methods 
 
         /// <summary>
+        /// Method which populates the PDF Viewer viewmodel and calls the window to open
+        /// </summary>
+        private void CallPDFViewer()
+        {
+            StaticAccessSystem.CreateNewPDFViewerViewmodel(WorkingPDFForm.OutputPath);
+            StaticAccessSystem.CallPDFWindowOpen();
+        }
+
+        /// <summary>
         /// Constructs the PDF form by using the viewmodel's <see cref="WorkingPDFForm"/> property
         /// </summary>
         /// <returns></returns>
@@ -176,15 +185,6 @@ namespace BTSCalculator.Core
             WorkingPDFForm.OutputPath = FormConstructor();
             CallPDFViewer(); 
         });
-
-        /// <summary>
-        /// Method which populates the PDF Viewer viewmodel and calls the window to open
-        /// </summary>
-        private void CallPDFViewer()
-        {
-            StaticAccessSystem.CreateNewPDFViewerViewmodel(WorkingPDFForm.OutputPath);
-            StaticAccessSystem.CallPDFWindowOpen();
-        }
 
         #endregion 
     }

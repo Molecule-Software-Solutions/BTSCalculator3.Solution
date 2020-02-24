@@ -2,6 +2,9 @@
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Class that provides methods for performing necessary calculations for this application
+    /// </summary>
     internal static class Calculations
     {
         /// <summary>

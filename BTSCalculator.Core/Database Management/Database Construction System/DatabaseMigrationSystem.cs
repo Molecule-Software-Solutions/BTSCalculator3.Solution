@@ -1,7 +1,13 @@
 ﻿namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Static class which is responsible for identifying necessary database updates and performs them if required
+    /// </summary>
     internal static class DatabaseMigrationSystem
     {
+        /// <summary>
+        /// Checks migration status and performs migration operations
+        /// </summary>
         public static void CheckMigrationStatus()
         {
             // Builds out initial tables for version 0 and converts to version 1

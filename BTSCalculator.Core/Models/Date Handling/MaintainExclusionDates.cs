@@ -3,6 +3,9 @@ using System.Data.SQLite;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Class that contains utilities for maintaining exclusion dates that are stored in the internal database 
+    /// </summary>
     internal static class MaintainExclusionDates
     {
         #region Public Methods 

@@ -3,8 +3,15 @@ using System.Data.SQLite;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Class that retrieves the database version for the migration system
+    /// </summary>
     internal static class DatabaseVersionRetrieval
     {
+        /// <summary>
+        /// returns an integer that identifies the version of the internal database 
+        /// </summary>
+        /// <returns></returns>
         public static int GetDatabaseVersion()
         {
             using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))

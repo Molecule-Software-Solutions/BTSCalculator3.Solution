@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Responsible for the initial construction of the internal database 
+    /// </summary>
     internal class DatabaseConstructor
     {
         /// <summary>

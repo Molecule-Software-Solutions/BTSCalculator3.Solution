@@ -3,13 +3,22 @@ using System.Data.SQLite;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Migration sequence from version 1 to version 2 of the internal database 
+    /// </summary>
     internal static class Version2ToVersion3Migration
     {
+        /// <summary>
+        /// Performs the migration
+        /// </summary>
         public static void PerformMigration()
         {
             Migrate();
         }
 
+        /// <summary>
+        /// Method that contains the connection and command objects that will execute the database migration 
+        /// </summary>
         private static void Migrate()
         {
             using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
@@ -41,6 +50,10 @@ namespace BTSCalculator.Core
             }
         }
 
+        /// <summary>
+        /// Command text for the migration command 
+        /// </summary>
+        /// <returns></returns>
         private static string MigrationCommandText()
         {
             return @"INSERT INTO SystemSettings (SettingKey, SettingValue) VALUES (@SettingKey, @SettingValue); PRAGMA user_version = 3;";

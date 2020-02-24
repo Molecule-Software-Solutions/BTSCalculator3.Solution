@@ -3,8 +3,14 @@ using System.Data.SQLite;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Migration sequence from version 1 to version 2 of the internal database 
+    /// </summary>
     internal static class Version1ToVersion2Migration
     {
+        /// <summary>
+        /// Performs the migration
+        /// </summary>
         public static void PerformMigration()
         {
             try
@@ -17,6 +23,9 @@ namespace BTSCalculator.Core
             }
         }
 
+        /// <summary>
+        /// Method that contains the connection and command objects that will carry out the migration 
+        /// </summary>
         private static void Migrate()
         {
             using (SQLiteConnection conn = new SQLiteConnection(new ApplicationConnectionStringSystem().ConnectionString))
@@ -48,6 +57,10 @@ namespace BTSCalculator.Core
             }
         }
 
+        /// <summary>
+        /// Command text that will be used by the migration command 
+        /// </summary>
+        /// <returns></returns>
         private static string MigrationCommandText()
         {
             return @"CREATE TABLE IF NOT EXISTS SystemSettings (

@@ -159,7 +159,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Per Diem rent total:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Prorated rent total:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding PerDiemRentDue, StringFormat=C2, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGreen" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 
@@ -169,7 +169,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should Per Diem rent be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
+                            <TextBlock Grid.Column="0" Margin="5 0 0 0" Text="Should prorated rent be collected:" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                             <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="{Binding ShouldPerDiemRentBeCollected, Converter={StaticResource YesNoConverter}, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkBlue" FontSize="14" FontWeight="DemiBold"/>
                         </Grid>
 

@@ -4,6 +4,9 @@ using System.Data.SQLite;
 
 namespace BTSCalculator.Core
 {
+    /// <summary>
+    /// Contains utilities for retrieving exclusion dates from the internal database 
+    /// </summary>
     internal static class RetrieveDates
     {
         /// <summary>

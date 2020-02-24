@@ -79,8 +79,8 @@
     <Reference Include="itext.svg, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.svg.dll</HintPath>
     </Reference>
-    <Reference Include="NC Juvenile Case Number Parser">
-      <HintPath>..\..\..\Desktop\Application Development\NC Juvenile Case Number Parser\NC Juvenile Case Number Parser\bin\Debug\NC Juvenile Case Number Parser.dll</HintPath>
+    <Reference Include="NC Civil Case Number Parser">
+      <HintPath>..\..\..\Desktop\Application Development\NC Civil Case Number Parser\NC Civil Case Number Parser\bin\Release\NC Civil Case Number Parser.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged, Version=3.2.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.2.1\lib\net40\PropertyChanged.dll</HintPath>
@@ -117,6 +117,9 @@
     <Compile Include="Enums\DialogTypes\DialogTypes.cs" />
     <Compile Include="Enums\Page Types\ApplicationPageTypes.cs" />
     <Compile Include="Enums\Payment Terms\RentalPaymentTerms.cs" />
+    <Compile Include="Helpers\DayOfWeekLibrary.cs" />
+    <Compile Include="Helpers\IntegerToMonthlyPaymentDateString.cs" />
+    <Compile Include="Helpers\RentDueLibrary.cs" />
     <Compile Include="Interfaces\IDialog.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Models\Calculation s\Calculations.cs" />
@@ -131,15 +134,17 @@
     <Compile Include="Viewmodels\Application\ApplicationViewmodel.cs" />
     <Compile Include="Viewmodels\Form Generator\FormGeneratorViewmodel.cs" />
     <Compile Include="Viewmodels\Main Menu\MainMenuViewmodel.cs" />
+    <Compile Include="Viewmodels\PDF Viewer\PDFViewerViewmodel.cs" />
     <Compile Include="Viewmodels\Static Viewmodel System\StaticAccessSystem.cs" />
     <Compile Include="Viewmodels\System Setup\SystemSetupViewmodel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Resources\BTSForm.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="COPYING.txt">

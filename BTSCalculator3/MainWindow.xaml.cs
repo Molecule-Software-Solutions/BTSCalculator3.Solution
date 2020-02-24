@@ -16,12 +16,24 @@ namespace BTSCalculator3
             DataContext = ViewModel;
             InitializeComponent();
             ViewmodelPropertyChangeMonitor();
-            SetDefaultPage(); 
+            SetDefaultPage();
+            EventMonitor(); 
         }
 
         private void SetDefaultPage()
         {
             WindowContentFrame.Content = ViewModel.CurrentPage.GetApplicationPage(); 
+        }
+
+        private void EventMonitor()
+        {
+            StaticAccessSystem.PDFWindowCalled += StaticAccessSystem_PDFWindowCalled;
+        }
+
+        private void StaticAccessSystem_PDFWindowCalled(object sender, System.EventArgs e)
+        {
+            PDFViewer pdfv = new PDFViewer();
+            pdfv.Show(); 
         }
 
         private void ViewmodelPropertyChangeMonitor()

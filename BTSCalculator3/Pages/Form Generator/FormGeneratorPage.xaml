@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BTSCalculator3"
+      xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
       Background="{StaticResource BackgroundGray}"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800">
@@ -11,9 +12,23 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBox">
-                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="Background" Value="White"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
+            <Style TargetType="xceed:MaskedTextBox">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+            <Style TargetType="ComboBox" >
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+
+            <local:RentalPeriodFromStringConverter x:Key="RentalPeriodConverter"/>
+            <local:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -55,83 +70,129 @@
             </StackPanel>
         </Border>
 
-        <!-- Party Information Grid -->
-        <Grid Grid.Row="2" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width=".5*"/>
-            </Grid.ColumnDefinitions>
-            
-            <!-- Case Number -->
-            <TextBlock Text="Case Number (NEW CVD FILE)" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
-
-            <!--Plaintiff Name-->
-            <TextBlock Grid.Row="1" Text="Plaintiff Name" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 15 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5 15 5 5"/>
-            
-            <!--Defendant Name-->
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="Defendant Name" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 25 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="5 25 5 5"/>
-            
-            <!--Plaintiff Address-->
-            <TextBlock Grid.Row="2" Text="Plaintiff Address" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
-
-            <!--Defendant Address-->
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="Defendant Address" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Margin="5"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Margin="5"/>
-
-            <!--Plaintiff City/State/Zip-->
-            <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="0 15 0 0">
+        <!--Border containing party information -->
+        <Border Grid.Row="2" BorderBrush="{StaticResource LinearBrushBorderBlue}" BorderThickness="2 8 2 2" CornerRadius="10" Margin="8" Background="{StaticResource LinearBrushBlue}">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+            <!-- Party Information Grid -->
+            <Grid Margin="0 5 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width=".5*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="City" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="State" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="5" Margin="5"/>
+
+                <!-- Case Number -->
+                <TextBlock Text="Case Number (NEW CVD FILE)"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <xceed:MaskedTextBox x:Name="CaseNumber_MTB" Mask="00 AAA 000000" Text="{Binding WorkingPDFForm.CaseNumber, UpdateSourceTrigger=LostFocus}" Grid.Row="0" Grid.Column="1" Margin="5" IncludePromptInValue="False" TabIndex="1" GotMouseCapture="CaseNumber_MTB_GotMouseCapture" GotKeyboardFocus="CaseNumber_MTB_GotKeyboardFocus"/>
+
+                <!--Plaintiff Name-->
+                <TextBlock Grid.Row="1" Text="Plaintiff Name"  FontSize="12" FontWeight="DemiBold" Margin="5 15 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5 15 5 5" Text="{Binding WorkingPDFForm.PlaintiffName, UpdateSourceTrigger=PropertyChanged}" TabIndex="2"/>
+
+                <!--Defendant Name-->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Defendant Name"  FontSize="12" FontWeight="DemiBold" Margin="5 25 0 5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="5 25 5 5" Text="{Binding WorkingPDFForm.DefendantName,UpdateSourceTrigger=PropertyChanged}" TabIndex="8"/>
+
+                <!--Plaintiff Address-->
+                <TextBlock Grid.Row="2" Text="Plaintiff Address"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.PlaintiffAddress, UpdateSourceTrigger=PropertyChanged}" TabIndex="3"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.PlaintiffAddress2, UpdateSourceTrigger=PropertyChanged}" TabIndex="4"/>
+
+                <!--Defendant Address-->
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Defendant Address"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.DefendantAddress, UpdateSourceTrigger=PropertyChanged}" TabIndex="9"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.DefendantAddress2, UpdateSourceTrigger=PropertyChanged}" TabIndex="10"/>
+
+                <!--Plaintiff City/State/Zip-->
+                <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="City"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.PlaintiffCity, UpdateSourceTrigger=PropertyChanged}" TabIndex="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="State"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <xceed:MaskedTextBox Mask="AA" Grid.Row="0" Grid.Column="3" Margin="5" Text="{Binding WorkingPDFForm.PlaintiffState, UpdateSourceTrigger=PropertyChanged}" TabIndex="6"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <xceed:MaskedTextBox Mask="00000" Grid.Row="0" Grid.Column="5" Margin="5" Text="{Binding WorkingPDFForm.PlaintiffZip,UpdateSourceTrigger=PropertyChanged}" TabIndex="7"/>
+                </Grid>
+
+                <!--Defendant City/State/Zip-->
+                <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="City"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding WorkingPDFForm.DefendantCity, UpdateSourceTrigger=PropertyChanged}" TabIndex="12"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="State"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <xceed:MaskedTextBox Mask="AA" Grid.Row="0" Grid.Column="3" Margin="5" Text="{Binding WorkingPDFForm.DefendantState, UpdateSourceTrigger=PropertyChanged}" TabIndex="13"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip"  FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <xceed:MaskedTextBox Mask="00000" Grid.Row="0" Grid.Column="5" Margin="5" Text="{Binding WorkingPDFForm.DefendantZip, UpdateSourceTrigger=PropertyChanged}" TabIndex="14"/>
+                </Grid>
+
+                <!--Period rent collected-->
+                <Grid Grid.Row="9" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Label-->
+                    <TextBlock Text="When is rent collected" FontSize="12" FontWeight="DemiBold"  Margin="5 15 0 0" VerticalAlignment="Center" Width="175"/>
+                    <!--Value Selection-->
+                    <ComboBox Grid.Column="1" Margin="15 15 0 0" Width="220" HorizontalAlignment="Left" Height="20" ItemsSource="{Binding RentDuePeriods, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding WorkingPDFForm.RentalTerm, Converter={StaticResource RentalPeriodConverter}, UpdateSourceTrigger=PropertyChanged}" TabIndex="15"/>
+                </Grid>
+
+                <Grid Grid.Row="10" Grid.ColumnSpan="2" Visibility="{Binding MonthlyRentalElementsVisible, Converter={StaticResource VisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Label-->
+                    <TextBlock Text="Day of month rent collected" FontSize="12" FontWeight="DemiBold"  Margin="5 15 0 0" VerticalAlignment="Center" Width="175"/>
+                    <!--Value Selection-->
+                    <TextBox x:Name="DayOfMonth_TB" Grid.Column="1" Width="60" HorizontalAlignment="Left" Height="20" Margin="15 15 0 0" Text="{Binding WorkingPDFForm.DayOfMonthRentDue, UpdateSourceTrigger=PropertyChanged}" TabIndex="16" GotMouseCapture="DayOfMonth_TB_GotMouseCapture" GotKeyboardFocus="DayOfMonth_TB_GotKeyboardFocus"/>
+                </Grid>
+
+                <Grid Grid.Row="10" Grid.ColumnSpan="2" Visibility="{Binding WeeklyRentalElementsVisible, Converter={StaticResource VisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Label-->
+                    <TextBlock Text="Day of week rent collected" FontSize="12" FontWeight="DemiBold"  Margin="5 15 0 0" VerticalAlignment="Center" Width="175"/>
+                    <!--Value Selection-->
+                    <ComboBox Grid.Column="1" Width="220" HorizontalAlignment="Left" Margin="15 15 0 0" Height="20" ItemsSource="{Binding DaySelections, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Value" SelectedValuePath="Value" SelectedValue="{Binding WorkingPDFForm.DayOfWeekRentDue, UpdateSourceTrigger=PropertyChanged}" TabIndex="17"/>
+                </Grid>
+                
+                <!--Print Form Button-->
+                <Button Grid.Row="4" Grid.Column="4" Grid.RowSpan="2" Height="50" Width="150" Content="Print Form" Background="{StaticResource LinearBrushGreen}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding GenerateForm_COMMAND, UpdateSourceTrigger=PropertyChanged}" TabIndex="18"/>
             </Grid>
-            
-            <!--Defendant City/State/Zip-->
-            <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 15 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="City" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="State" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="Zip" Foreground="{StaticResource JudicialBlue}" FontSize="12" FontWeight="DemiBold" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="5" Margin="5"/>
-            </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </Page>

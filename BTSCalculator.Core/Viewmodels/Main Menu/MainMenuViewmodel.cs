@@ -160,28 +160,42 @@ namespace BTSCalculator.Core
                     ShouldPerDiemRentBeCollected = false;
                     ShouldCourtCostsBeCollected = false;
                 }
-
-
-
             }
-
             // Calculates the total due
             CalculateTotalDue(); 
         });
 
+        /// <summary>
+        /// Performs a calculation to determine the total that will be due
+        /// </summary>
         private void CalculateTotalDue()
         {
             TotalDueToday = PerDiemRentDue + UndisputedArrearsFromCalculation + TotalCourtCostsDue;
             TotalDueOnRentDate = MonthlyRentalRate;
         }
 
+        /// <summary>
+        /// Command that directs the UI to change to the System Settings page
+        /// </summary>
         public RelayCommand GoToSystemSetup_COMMAND => new RelayCommand(() =>
         {
             StaticAccessSystem.ApplicationVM.CurrentPage = ApplicationPageTypes.ApplicationSetup;
         });
 
+        /// <summary>
+        /// Command that prepares a new viewmodel for the Form Generator and commands the UI to change screens to the form generator page
+        /// </summary>
         public RelayCommand GoToFormGenerator_COMMAND => new RelayCommand(() =>
         {
+            StaticAccessSystem.ClearFormGeneratorVM(); 
+            StaticAccessSystem.CreateNewFormGeneratorViewmodel(new PDFForm()
+            {
+                RentalRate = MonthlyRentalRate,
+                UndisputedRent = UndisputedArrearsFromCalculation,
+                ProratedRent = PerDiemRentDue,
+                TotalRentDeposited = UndisputedArrearsFromCalculation + PerDiemRentDue,
+                JudgmentDate = JudgmentDate,
+            });
             StaticAccessSystem.ApplicationVM.CurrentPage = ApplicationPageTypes.CompleteFormPage;
         });
     }

@@ -103,6 +103,9 @@
     <Compile Include="Pages\System Settings\SystemSettingsPage.xaml.cs">
       <DependentUpon>SystemSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PDFViewer.xaml.cs">
+      <DependentUpon>PDFViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\Dialog Pages\StandardDialogPage.xaml.cs">
       <DependentUpon>StandardDialogPage.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,7 @@
     <Compile Include="Value Converters\Application Pages\ApplicationPageConverters.cs" />
     <Compile Include="Value Converters\Boolean Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Value Converters\Boolean Converters\BooleanToYesNoConverter.cs" />
+    <Compile Include="Value Converters\Rental Period Converters\RentalPeriodFromStringConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\System Settings\SystemSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PDFViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -97,7 +97,7 @@
                     <local:FriendlyLabeledDatePicker LabelText="Date of Judgment" Margin="5 5" DateTimeSelected="{Binding JudgmentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <local:FriendlyLabeledDatePicker LabelText="Next Rent Due Date" Margin="5 5" DateTimeSelected="{Binding RentDueDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <local:FriendlyLabeledTextBox LabelText="Undisputed Rent In Arrears" Margin="5 5" TextboxText="{Binding UndisputedArrears, StringFormat=C2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <local:FriendlyLabeledTextBox LabelText="Monthly Rental Rate" TextboxText="{Binding MonthlyRentalRate, StringFormat=C2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 5"/>
+                    <local:FriendlyLabeledTextBox LabelText="Monthly/Weekly Rental Rate" TextboxText="{Binding MonthlyRentalRate, StringFormat=C2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 5"/>
                     <CheckBox Content="Defendant is Indigent" Foreground="White" FontSize="14" FontWeight="DemiBold" Margin="5 5" IsChecked="{Binding Indigent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </StackPanel>              

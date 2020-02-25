@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace BTSCalculator.Core
 {
     /// <summary>
     /// Viewmodel that controls the UI's System Setup page
     /// </summary>
-    public class SystemSetupViewmodel : BaseViewmodel
+    public class SystemSetupViewmodel : BaseViewmodel, IFileSelection
     {
         #region Private Members and Backing Fields 
 
@@ -78,6 +79,12 @@ namespace BTSCalculator.Core
         /// </summary>
         public ExclusionDate SelectedHoliday { get; set; }
 
+        /// <summary>
+        /// Batch holiday file path
+        /// </summary>
+        public string SelectedFilePath { get; set; }
+
+
         #endregion
 
         #region Private Methods 
@@ -91,6 +98,21 @@ namespace BTSCalculator.Core
             Holidays = RetrieveDates.RetrieveHolidays();
             CountyName = CountyNameManagement.GetCountyName();
             DefaultCosts = CostsManager.GetCosts();
+        }
+
+        private bool CheckForExistingDate(DateTime date)
+        {
+            foreach (ExclusionDate exclusionDate in ExclusionDates)
+            {
+                if (date == exclusionDate.Date)
+                    return true; 
+            }
+            foreach (ExclusionDate exclusionDate1 in Holidays)
+            {
+                if (date == exclusionDate1.Date)
+                    return true;
+            }
+            return false; 
         }
 
         #endregion
@@ -122,9 +144,16 @@ namespace BTSCalculator.Core
         {
             try
             {
-                MaintainExclusionDates.AddExclusionDate(WorkingExclusionDate);
-                ExclusionDates.Add(new ExclusionDate() { Date = WorkingExclusionDate });
-                Setup();
+                if (!CheckForExistingDate(WorkingExclusionDate))
+                {
+                    MaintainExclusionDates.AddExclusionDate(WorkingExclusionDate);
+                    ExclusionDates.Add(new ExclusionDate() { Date = WorkingExclusionDate });
+                    Setup(); 
+                }
+                else
+                {
+                    StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "Existing Dates", DialogMessage = "The date you are adding has already been added as either an exclusion date or a holiday. Please check your entry and try again" });
+                }
             }
             catch (Exception ex)
             {
@@ -140,9 +169,16 @@ namespace BTSCalculator.Core
         {
             try
             {
-                MaintainExclusionDates.AddHoliday(WorkingHoliday);
-                Holidays.Add(new ExclusionDate() { Date = WorkingHoliday });
-                Setup();
+                if (!CheckForExistingDate(WorkingHoliday))
+                {
+                    MaintainExclusionDates.AddHoliday(WorkingHoliday);
+                    Holidays.Add(new ExclusionDate() { Date = WorkingHoliday });
+                    Setup(); 
+                }
+                else
+                {
+                    StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "Existing Dates", DialogMessage = "The date you are adding has already been added as either an exclusion date or a holiday. Please check your entry and try again" });
+                }
             }
             catch (Exception ex)
             {
@@ -221,6 +257,67 @@ namespace BTSCalculator.Core
             StaticAccessSystem.ApplicationVM.DefaultCosts = DefaultCosts;
         }, DefaultCosts != 0);
 
-        #endregion 
+        /// <summary>
+        /// Adds batch holidays to the database
+        /// </summary>
+        public ParamRelayCommand HolidayBatchAdd_COMMAND => new ParamRelayCommand((param) => 
+        {
+            var path = param as IFileSelection;
+            SelectedFilePath = path.SelectedFilePath;
+            SaveBatchHolidays();
+        }, true);
+
+        /// <summary>
+        /// Determines whether a date from a batch is already entered
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private bool CheckBatchDateAgainstExisting(DateTime date)
+        {
+            foreach (ExclusionDate exclusionDate in Holidays)
+            {
+                if (date == exclusionDate.Date)
+                    return true;
+            }
+            return false; 
+        }
+
+        /// <summary>
+        /// Accesses the batch file and adds all qualifying dates to the database 
+        /// </summary>
+        private void SaveBatchHolidays()
+        {
+            if(System.IO.File.Exists(SelectedFilePath))
+            {
+                if(System.IO.Path.GetExtension(SelectedFilePath) == ".BTS3H")
+                {
+                    DataSet ds = new DataSet();
+                    ds.ReadXml(SelectedFilePath);
+                    foreach (DataRow dataRow in ds.Tables[0].Rows)
+                    {
+                        DateTime result;
+                        if (DateTime.TryParse(dataRow[0].ToString(), out result))
+                        {
+                            if (!CheckBatchDateAgainstExisting(result))
+                            {
+                                MaintainExclusionDates.AddHoliday(result);
+                                Holidays.Add(new ExclusionDate() { Date = result });
+                            }
+                        }
+                    }
+                    StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "Success!", DialogMessage = "Holidays recorded successfully" });
+                }
+                else
+                {
+                    StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "File Path Error", DialogMessage = "The file you have selected is not a batch holiday file. Please make your selection again" });
+                }
+            }
+            else
+            {
+                StaticAccessSystem.ApplicationVM.ShowDialog(new DialogModel() { DialogType = DialogTypes.Standard, DialogHeader = "File Path Error", DialogMessage = "The file path selected was not accurate. Please select the file again" });
+            }
+        }
+
+        #endregion
     }
 }

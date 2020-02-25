@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using BTSCalculator.Core;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BTSCalculator.Core;
 
 namespace BTSCalculator3
 {
@@ -26,6 +14,8 @@ namespace BTSCalculator3
         {
             DataContext = ViewModel; 
             InitializeComponent();
+            CaseNumber_MTB.Focus(); 
+            CaseNumber_MTB.SelectAll(); 
         }
 
         private void DayOfMonth_TB_GotMouseCapture(object sender, MouseEventArgs e)

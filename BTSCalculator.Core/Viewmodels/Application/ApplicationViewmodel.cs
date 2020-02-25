@@ -53,6 +53,7 @@
         private void Setup()
         {
             DatabaseMigrationSystem.CheckMigrationStatus();
+            ExclusionDateCleanup.PerformCleanup(); 
             County = CountyNameManagement.GetCountyName();
             DefaultCosts = CostsManager.GetCosts(); 
         }

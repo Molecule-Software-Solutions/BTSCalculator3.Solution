@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base Classes\Commands\ParamRelayCommand.cs" />
     <Compile Include="Base Classes\Commands\RelayCommand.cs" />
     <Compile Include="Base Classes\Viewmodel Base\BaseViewmodel.cs" />
     <Compile Include="Database Management\Connection String System\ApplicationConnectionStringSystem.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Database Management\Database Construction System\Migration\Version1ToVersion2Migration.cs" />
     <Compile Include="Database Management\Database Construction System\Migration\Version2ToVersion3Migration.cs" />
     <Compile Include="Database Management\Database Retrieval System\SafeDatabaseRetrievalHelpers.cs" />
+    <Compile Include="Database Management\Exclusion Date Cleanup\ExclusionDateCleanup.cs" />
     <Compile Include="Enums\DialogTypes\DialogTypes.cs" />
     <Compile Include="Enums\Page Types\ApplicationPageTypes.cs" />
     <Compile Include="Enums\Payment Terms\RentalPaymentTerms.cs" />
@@ -121,8 +123,9 @@
     <Compile Include="Helpers\IntegerToMonthlyPaymentDateString.cs" />
     <Compile Include="Helpers\RentDueLibrary.cs" />
     <Compile Include="Interfaces\IDialog.cs" />
+    <Compile Include="Interfaces\IFileSelection.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
-    <Compile Include="Models\Calculation s\Calculations.cs" />
+    <Compile Include="Models\Calculations\Calculations.cs" />
     <Compile Include="Models\Costs Manager\CostsManager.cs" />
     <Compile Include="Models\Date Handling\MaintainExclusionDates.cs" />
     <Compile Include="Models\Date Retrieval\RetrieveDates.cs" />
@@ -151,6 +154,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GNU General Public License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="iText License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -46,6 +46,11 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
+                <Button x:Name="BatchHolidayEntry_BTN" Margin="5" Padding="5" Background="{StaticResource LinearBrushGreen}" Foreground="White" FontWeight="DemiBold" FontSize="16" Content="Import Batch Holiday File" BorderBrush="DimGray" BorderThickness="1" Width="250" Click="BatchHolidayEntry_BTN_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
             </StackPanel>
         </Border>
 

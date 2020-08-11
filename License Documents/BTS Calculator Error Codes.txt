@@ -1,0 +1,5 @@
+ER-C01 - Error with timespan calculation This error will originate from CalculateBusinessTimeSpan in the Calculations class of the core library. 
+
+ER-C02 - Error with the timespan calculation that is used during the calculation of per diem rent due between the judgment and rent due dates. This error will originate from CalculatePerDiemRent in the Calculations class of the core library. 
+
+ER-C03 - Error with the timespan calculation that is used during the calculation of per diem rental rate. This error will originate from CalculatePerDiemRate in the Calculations class of the core library.

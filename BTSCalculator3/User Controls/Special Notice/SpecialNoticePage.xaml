@@ -32,9 +32,20 @@
                     </Image.Effect>
                 </Image>
                 
+                <!--Molecule Software Branding-->
+                <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="/MoleculeLogoOnlyWhite-01.png" Margin="15 2 15 2" RenderOptions.BitmapScalingMode="HighQuality">
+                    <Image.Effect>
+                        <DropShadowEffect/> 
+                    </Image.Effect>
+                </Image>
+                
                 <!--Title of Application-->
                 <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Bond to Stay Calculator" Foreground="#ffb326" FontSize="20" Margin="0 10 0 0"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="For Summary Ejectment Appeals" Foreground="White" FontSize="14" Margin="0 32 0 0"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+                    <TextBlock Text="For North Carolina Summary Ejectment Appeals" Foreground="White" FontSize="14" Margin="0 32 0 0"/>
+                    <TextBlock Text="Molecule Software Solutions - 2020" Foreground="White" FontSize="12" Margin="0"/>
+
+                </StackPanel>
                 
                 <!--License Acknowledgments-->
                 <TextBlock Width="330" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="PDF Editing provided by Itext7 under the AGPL Open Source License. See Itext license file included with this application for more information" TextWrapping="WrapWithOverflow" Foreground="White" FontWeight="DemiBold" FontSize="10" VerticalAlignment="Bottom"/>
